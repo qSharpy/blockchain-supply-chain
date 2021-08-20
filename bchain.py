@@ -50,7 +50,7 @@ class Blockchain:
         return computed_hash
 
     def add(self, data):
-        block=Block(len(self.chain), self.chain[-1], data, 'datetime.now().timestamp()',0)
+        block=Block(len(self.chain), self.chain[-1], data, datetime.now().timestamp(),0)
         block.hash = self.proof_of_work(block)
         self.chain.append(block.hash)
         self.transactions.append(block.__dict__)

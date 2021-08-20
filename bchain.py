@@ -44,10 +44,10 @@ class Blockchain:
         difficulty=1
         block.nonce=0
         computed_hash=block.compute_hash()
-        while not (computed_hash.endswith('O' * difficulty) and ('55' * difficulty) in computed_hash):
+        while not (computed_hash.endswith('0' * difficulty) and ('55' * difficulty) in computed_hash):
             block.nonce += 1
             computed_hash = block.compute_hash()
-            return computed_hash
+        return computed_hash
 
     def add(self, data):
         block=Block(len(self.chain), self.chain[-1], data, 'datetime.now().timestamp()',0)
@@ -57,7 +57,7 @@ class Blockchain:
         return json.loads(str(block.__dict__).replace('\'','\"'))
 
     def getTransactions (self, id):
-        labels=['Manufacturer', 'Transportation', 'Retailer']
+        labels=['Manufacturer', 'BOB']
         while True:
             try:
                 if id == 'all':
@@ -71,7 +71,7 @@ class Blockchain:
             except Exception as e:
                 print(e)
 def main():
-    manufacturer={
+    Manufacturer={
         'transactions':
             [
                 {
@@ -130,7 +130,7 @@ def main():
     }
 
     B=Blockchain()
-    a=B.add(manufacturer)
+    a=B.add(Manufacturer)
     a=B.add(BOB)
     B.getTransactions('all')
 
